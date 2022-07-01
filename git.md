@@ -15,28 +15,29 @@
   $ git config --global credential.helper cache
 ```
 
-- Initialize a Repository
+- Створити новий Git-репозиторій
 
 ```bash
   $ git init
 ```
 
-- Add Individual File or All Files To Staging Area
+- Додати до контролю нових файлів та індексувати змінених файлів
 
 ```bash
   $ git add somefile.js
   $ git add .
 ```
 
-- Check a Repository Status
+- Перевірити статус файлів
 
 ```bash
   $ git status
 ```
 
-- Commit Changes With a Single Line Message or Through an Editor
+- Зафіксувати всі зміни(увійдуть усі проіндексовані файли)
 
 ```bash
+  $ git commit
   $ git commit -m "Your short summary about the commit"
 ```
 
@@ -76,35 +77,38 @@ You can also provide a filename as a parameter to only view the changes of a spe
 ```bash
   $ git mv dir1/somefile.js dir2
 ```
+- Вилучити файл(-и) з індексу(що були додані до індексу командою add та не були закомічені)
+```bash
+  $ git reset HEAD somefile.js
+  $ git reset HEAD
+```
 - Revert Unstaged and Staged Changes
 ```bash
   $ git checkout somefile.js
-  $ git reset HEAD somefile.js
-  $ git reset HEAD
 ```
 - Amend The Most Recent Commit (Alert !!! Don’t amend public commits.)
 
 ```bash
-$ git commit --amend -m "Updated message for the previous commit"
+  $ git commit --amend -m "Updated message for the previous commit"
 ```
 -  Rollback Last Commit
 
 ```bash
-$ git revert HEAD
+  $ git revert HEAD
 ```
 - Rollback a Particular Commit
 ```bash
-$ git revert 1af17e
+  $ git revert 1af17e
 ```
 - Create and Switch To a New Branch
 ```bash
-$ git branch new_branch_name
-$ git checkout -b new_branch_name
+  $ git branch new_branch_name
+  $ git checkout -b new_branch_name
 ```
 - List All Branches (list all remote branches by using the -a flag)
 ```bash
-$ git branch
-$ git branch -a
+  $ git branch
+  $ git branch -a
 ```
 
 - Видалення гілок
@@ -112,7 +116,7 @@ $ git branch -a
   $ git branch -d <name-of-branch-to-be-deleted>
   $ git branch --delete <name-of-branch-to-be-deleted>
 ```
-- Видалення віддалених гілок
+- Видалення гілок з віддаленого сховища
 ```bash
   $ git push <remote-name-given-to-repository> --delete <name-of-branch>
 ```
@@ -130,48 +134,56 @@ $ git branch -a
   $ git merge --abort
   $ git reset
 ```
-- Додавання віддалених сховищ
+- Додати віддалене сховище
 ```bash
   $ git remote add <shortname> <url>
 ```
 - Подивиться на віддалені сервера
 ```bash
   $ git remote
-origin
+  origin
 ```
 -v, покаже посилання, які Git зберігає та використовує при читанні та записі до цього сховища
 ```bash
-$ git remote -v
-origin	https://github.com/schacon/ticgit (fetch)
-origin	https://github.com/schacon/ticgit (push)
+  $ git remote -v
+  origin	https://github.com/schacon/ticgit (fetch)
+  origin	https://github.com/schacon/ticgit (push)
 ```
 - Змінити посилання віддалених сховищ
 ```bash
-$ git remote set-url <an-existing-remote-name> <url>
+  $ git remote set-url <an-existing-remote-name> <url>
 ```
 - Get Additional Information About a Remote Repository
 ```bash
-$ git remote show origin
+  $ git remote show origin
 ```
-- Push Changes To a Remote Repository
+- Надсилати зміни до віддаленого сховища origin на гілку main
 ```bash
-$ git push origin main
+  $ git push origin main
 ```
-- Pull Changes From a Remote Repository
+- Надсилати зміни до віддаленого сховища origin на гілку main, яка ще не створена на віддаленому сховищу. Створити її та зв'язати з локальною гілкою main
 ```bash
-$ git pull
-$ git pull --verbose
+  $ git push -u origin main
+```
+- Отримати всі нові дані з віддаленного середовища поточної гілки та зберігти їх у локальному репозиторії. Однак не зливати їх у поточну гілку
+```bash
+  $ git fetch
+```
+- Отримати всі нові дані з віддаленного середовища поточної гілки та злити їх у поточну гілку (git fetch + git merge)
+```bash
+  $ git pull
+  $ git pull --verbose
 ```
 - Merge Remote Repository With Local Repository
 ```bash
-$ git merge origin
+  $ git merge origin
 ```
 - Push a New Branch To Remote Repository
 ```bash
-$ git push -u origin new_branch
+  $ git push -u origin new_branch
 ```
 - Use Rebase
 ```bash
-$ git rebase branch_name
+  $ git rebase branch_name
 ```
 [Source](https://levelup.gitconnected.com/top-30-git-commands-you-should-know-to-master-git-cli-f04e041779bc)
