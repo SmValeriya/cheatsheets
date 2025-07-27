@@ -91,3 +91,58 @@ const flat = (arr) => arr.reduce((a, b) => (Array.isArray(b) ? [...a, ...flat(b)
 - **Скинути усі кукі**
 
 ``const clearCookies = () => document.cookie.split(';').forEach((c) => (document.cookie = c.replace(/^ +/, '').replace(/=.*/, `=;expires=${new Date().toUTCString()};path=/`)))``
+
+- **Обмежити частоту виконання функції (debouncing)**
+
+``
+const debounce = (func, delay) => {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func(...args), delay);
+  };
+};
+``
+
+- **Контроль частоти виконання функції протягом певного часу (throttling)**
+
+``
+const throttle = (func, limit) => {
+  let lastFunc;
+  let lastRan;
+  return (...args) => {
+    if (!lastRan) {
+      func(...args);
+      lastRan = Date.now();
+    } else {
+      clearTimeout(lastFunc);
+      lastFunc = setTimeout(() => {
+        if (Date.now() - lastRan >= limit) {
+          func(...args);
+          lastRan = Date.now();
+        }
+      }, limit - (Date.now() - lastRan));
+    }
+  };
+};
+``
+
+- **Функція кешування результатів для швидкого повторного виклику**
+
+``
+const memoize = fn => {
+  const cache = {};
+  return (...args) => {
+    const key = JSON.stringify(args);
+    if (!cache[key]) cache[key] = fn(...args);
+    return cache[key];
+  };
+};
+``
+
+- **Використання Intl для форматування валюти, дат та чисел**
+
+``
+const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+console.log(formatter.format(1000)); // $1,000.00
+``
